@@ -128,7 +128,7 @@ function pullMovieData(mSearch) {
 }
 function displayMovieResults(m) {
   $("#movie-results").empty();
-$("#movie-results").append(`<img src="${m.Poster}">`)
+$("#movie-results").append(`<h3>${m.Title}</h3><br><img src="${m.Poster}">`)
   
 
 }
