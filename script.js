@@ -2,10 +2,10 @@
 $(document).foundation();
 
 //OMDb API Key: 58d2e622
-
-//http://img.omdbapi.com/?apikey=58d2e622]&
-
+// Superhero API Key
 const api_key = "10223990622099685";
+
+//On form submit start preloader and pull data for superhero api
 function inputListener() {
     $("form").on("submit", function (e) {
         e.preventDefault();
@@ -15,6 +15,7 @@ function inputListener() {
         pullData(search);
     });
 }
+//Fetch the superhero API data
 function pullData(search) {
     console.log(`The search value: ${search}.`),
         console.log(`GET REQUEST TO: https://superheroapi.com/api/${api_key}/search/${search}`),
@@ -23,6 +24,7 @@ function pullData(search) {
             .then((e) => displayResults(e))
             .catch((e) => console.log(e));
 }
+// unhide movie suggestion button and display results based on filter parameters
 function displayResults(e) {
   $( "#movieBtn" ).removeClass( "hidden")
     let searchResults = $(".results")
@@ -39,6 +41,7 @@ function displayResults(e) {
        if (alignment && alignment !== e.results[i].biography.alignment) {
         continue;
       }
+      //render all HTML into .results div
       let html = `
       <div data-toggler data-animate="fade-in fade-out" class="grid-x grid-padding-x">
         <div class="large-12 medium-12 cell">
@@ -103,24 +106,28 @@ function displayResults(e) {
           </div>
   </div>
       `
-      $('.preloader').remove();
+      //remove the preloader
+      $('.preloader').empty();
+      //Append searchResults
         searchResults.append(`${html}`);
     }
 }
 
+//click #movieBtn button function event 
 function inputListenerMovie() {
     $("#movieBtn").click( function(e) {
         let mSearch = $("#search").val().toLowerCase();
         console.log(mSearch) 
+        //pull movie data from omdbapi.com
         pullMovieData(mSearch);
     });
 }
 
 function pullMovieData(mSearch) {
-  //http://img.omdbapi.com/?apikey=58d2e622
+  //https://omdbapi.com/?t=title&apikey=58d2e622
 
     console.log(`The search value: ${mSearch}.`),
-        console.log(`GET REQUEST TO: http://www.omdbapi.com/?t=${search}&apikey=58d2e622`),
+        console.log(`GET REQUEST TO: http://www.omdbapi.com/?t=${mSearch}&apikey=58d2e622`),
         fetch(`https://www.omdbapi.com/?t=${mSearch}&apikey=58d2e622`)
             .then((m) => m.json())
             .then((m) => displayMovieResults(m))
@@ -128,6 +135,7 @@ function pullMovieData(mSearch) {
 }
 function displayMovieResults(m) {
   $("#movie-results").empty();
+  //Suggested movie title and movie poster
 $("#movie-results").append(`<h3>${m.Title}</h3><br><img src="${m.Poster}">`)
   
 
@@ -135,10 +143,6 @@ $("#movie-results").append(`<h3>${m.Title}</h3><br><img src="${m.Poster}">`)
 
 $(function () {
     inputListener();
-   
+    inputListenerMovie();
 
 });
-
-$(function () {
- inputListenerMovie();
- });
