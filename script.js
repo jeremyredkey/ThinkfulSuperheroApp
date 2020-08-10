@@ -43,7 +43,7 @@ function displayResults(e) {
       }
       //render all HTML into .results div
       let html = `
-      <div data-toggler data-animate="fade-in fade-out" class="grid-x grid-padding-x">
+      <div class="grid-x grid-padding-x">
         <div class="large-12 medium-12 cell">
   
           <div class="grid-x grid-padding-x">
@@ -136,7 +136,11 @@ function pullMovieData(mSearch) {
 function displayMovieResults(m) {
   $("#movie-results").empty();
   //Suggested movie title and movie poster
-$("#movie-results").append(`<h3>${m.Title}</h3><br><img src="${m.Poster}">`)
+$("#movie-results").append(`<div class="grid-x grid-padding-x">
+<h3 class="movie-title">${m.Title}</h3>
+<br>
+<img src="${m.Poster}">
+</div>`)
   
 
 }
