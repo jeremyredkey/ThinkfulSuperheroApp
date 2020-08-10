@@ -30,25 +30,33 @@
       <div class="grid-x grid-padding-x"></div>
       <form>
         <div class="large-6 cell">
-          <h5>Search For Any <span id="changeLabel"><strong>Superhero</strong></span> Character You Can Think Of</h5>
+          <h5>Search For A <span id="changeLabel"><strong>Super</strong></span> Character You Can Think Of</h5>
+          <p><a href="https://akabab.github.io/superhero-api/api/glossary.html" target="_blank">List of All Characters</a></p>
           <div id="search-bar" class="input-group">
             <input id="search" type="search" placeholder="E.g. you can search 'Groot', etc."  required />
             <input id="submitBtn" class="button" type="submit" value="SEARCH">
           </div>
         </div>
-        <!-- <div class="large-4 cell">
+         <div class="large-4 cell">
           <div class="input-group">
-            <p>Good or Evil?</p>
-            <div class="switch large">
-              <input class="switch-input" id="evil-good" type="checkbox" name="switch">
-              <label class="switch-paddle" for="evil-good">
-                <span class="show-for-sr">Good or Evil?</span>
-                <span class="switch-active" aria-hidden="true">Evil</span>
-                <span class="switch-inactive" aria-hidden="true">Good</span>
-              </label>
-            </div>
+          
+            <label>Select Gender
+        <select id="gender">
+          <option value=""></option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </label>
+
+        <label>Select Alignment
+        <select id="salignment">
+          <option value=""></option>
+          <option value="good">Good</option>
+          <option value="bad">Bad</option>
+        </select>
+      </label>
           </div>
-        </div> -->
+        </div>
     </div>
     </div>
     </div>
@@ -59,6 +67,11 @@
 <section class="results">
     <div class="preloader"></div>
 </section>
+
+<section class="movie">
+    <button id="movieBtn" class="button movie-button hidden" type="button"> Suggest Movie From Your Search</button>
+     <div id="movie-results"></div>
+  </section>
 
 
 

@@ -1,6 +1,9 @@
 "use strict";
 $(document).foundation();
 
+//OMDb API Key: 58d2e622
+
+//http://img.omdbapi.com/?apikey=58d2e622]&
 
 const api_key = "10223990622099685";
 function inputListener() {
@@ -21,12 +24,21 @@ function pullData(search) {
             .catch((e) => console.log(e));
 }
 function displayResults(e) {
+  $( "#movieBtn" ).removeClass( "hidden")
     let searchResults = $(".results")
     searchResults.empty()
+  const gender = $("#gender").val()
+  const alignment = $('#salignment').val()
 
-    console.log(e);
     for (let i = 0; i < e.results.length; i++)  {
 
+      if (gender && gender !== e.results[i].appearance["gender"]) {
+        continue;
+      }
+
+       if (alignment && alignment !== e.results[i].biography.alignment) {
+        continue;
+      }
       let html = `
       <div data-toggler data-animate="fade-in fade-out" class="grid-x grid-padding-x">
         <div class="large-12 medium-12 cell">
@@ -39,12 +51,13 @@ function displayResults(e) {
                     <img class="character-img" src="${e.results[i].image.url}">
                   </li>
                   <li>
-                    <h3><strong>${e.results[i].name}</strong></h3>
+                    <h2><strong>${e.results[i].name}</strong></h2>
                   </li>
                   <li>
                   <p id="alignment">Alignment: <strong>${e.results[i].biography.alignment}</strong></p>
                   </li>
                   <li>
+                  <p>Gender: <strong>${e.results[i].appearance["gender"]}</strong></p>
                     <p>First Appearance: <strong>${e.results[i].biography["first-appearance"]}</strong></p>
                     <p>Group Affliation: <strong>${e.results[i].connections["group-affiliation"]}</strong></p>
                   </li>
@@ -91,12 +104,41 @@ function displayResults(e) {
   </div>
       `
       $('.preloader').remove();
-        searchResults.append(`${html}`).fadeIn('slow');
+        searchResults.append(`${html}`);
     }
 }
 
+function inputListenerMovie() {
+    $("#movieBtn").click( function(e) {
+        let mSearch = $("#search").val().toLowerCase();
+        console.log(mSearch) 
+        pullMovieData(mSearch);
+    });
+}
+
+function pullMovieData(mSearch) {
+  //http://img.omdbapi.com/?apikey=58d2e622
+
+    console.log(`The search value: ${mSearch}.`),
+        console.log(`GET REQUEST TO: http://www.omdbapi.com/?t=${search}&apikey=58d2e622`),
+        fetch(`https://www.omdbapi.com/?t=${mSearch}&apikey=58d2e622`)
+            .then((m) => m.json())
+            .then((m) => displayMovieResults(m))
+            .catch((m) => console.log(m));
+}
+function displayMovieResults(m) {
+  $("#movie-results").empty();
+$("#movie-results").append(`<img src="${m.Poster}">`)
+  
+
+}
 
 $(function () {
     inputListener();
+   
 
 });
+
+$(function () {
+ inputListenerMovie();
+ });
