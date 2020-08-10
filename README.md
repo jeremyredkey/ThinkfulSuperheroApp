@@ -14,10 +14,25 @@ Not only does it search for a wide variety of super characters but gives a card 
 As a additional feature at the bottom of the page too it allows for user to get a movie suggestion based on what they searched.
 
 ## Screenshots of App
-![home screen][https://repository-images.githubusercontent.com/285908899/b61e0d00-da6b-11ea-9ccb-30a8138652e1]
+
+Landing Page:
+
+![landing page](screenshots/homepage.png)
+
+Movie Suggestion Feature:
+
+![movie suggestion feature](screenshots/moviesuggestion.png)
+
+Search Results Character Card:
+
+![character card](screenshots/supercard.png)
+
+Character Power Stats:
+
+![character power stats](screenshots/recommendations.png)
 
 ## Technologies Used for this Project
-Built Using HTML, CSS, jQuery, Superhero API, OMDb API for Movie Suggestion, Foundation Framework, &amp; Font-Awesome 6.
+Built Using HTML, CSS, JavaScript, JQuery, Superhero API, OMDb API for Movie Suggestion, Foundation Framework, &amp; Font-Awesome 6.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
