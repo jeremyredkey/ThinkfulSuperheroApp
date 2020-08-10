@@ -15,7 +15,7 @@ As a additional feature at the bottom of the page too it allows for user to get 
 
 ## Screenshots of App
 
-Landing Page:
+Landing Page With Full Search and Filter Dropdowns:
 
 ![landing page](screenshots/homepage.png)
 
@@ -29,7 +29,7 @@ Search Results Character Card:
 
 Character Power Stats:
 
-![character power stats](screenshots/recommendations.png)
+![character power stats](screenshots/powerstats.png)
 
 ## Technologies Used for this Project
 Built Using HTML, CSS, JavaScript, JQuery, Superhero API, OMDb API for Movie Suggestion, Foundation Framework, &amp; Font-Awesome 6.
