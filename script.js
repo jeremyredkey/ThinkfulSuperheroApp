@@ -7,42 +7,58 @@ const api_key = "10223990622099685";
 
 //On form submit start preloader and pull data for superhero api
 function inputListener() {
-    $("form").on("submit", function (e) {
+    $("form").on("submit", function(e) {
         e.preventDefault();
         $('.preloader').html(`<i class="fas fa-circle-notch fa-spin"></i>`)
+        $("#movie-results").empty();
         let search = $("#search").val().toLowerCase();
-        console.log(search) 
         pullData(search);
     });
 }
 //Fetch the superhero API data
 function pullData(search) {
-    console.log(`The search value: ${search}.`),
-        console.log(`GET REQUEST TO: https://superheroapi.com/api/${api_key}/search/${search}`),
-        fetch(`https://superheroapi.com/api.php/${api_key}/search/${search}`)
-            .then((e) => e.json())
-            .then((e) => displayResults(e))
-            .catch((e) => console.log(e));
+    fetch(`https://superheroapi.com/api.php/${api_key}/search/${search}`)
+        .then((e) => e.json())
+        .then((e) => displayResults(e))
+        .catch((e) => alert("No character was found with that name, please try again."));
 }
 // unhide movie suggestion button and display results based on filter parameters
 function displayResults(e) {
-  $( "#movieBtn" ).removeClass( "hidden")
+    $("#movieBtn").removeClass("hidden")
     let searchResults = $(".results")
     searchResults.empty()
-  const gender = $("#gender").val()
-  const alignment = $('#salignment').val()
+    const gender = $("#gender").val()
+    const alignment = $('#salignment').val()
 
-    for (let i = 0; i < e.results.length; i++)  {
+    if (e.response === 'error') {
+        $("#movieBtn").addClass("hidden")
+        //create error message
+        const errHtml = `<div class="callout alert">
+  <h5>No Character Was Found</h5>
+  <p>If you need to use a legend to look up a specific character you can by referring to the link below.</p>
+  <a href="https://akabab.github.io/superhero-api/api/glossary.html" target="_blank">Here is the List of All the Characters</a>
+</div>`
+    //add error message to search results
+        searchResults.append(errHtml)
 
-      if (gender && gender !== e.results[i].appearance["gender"]) {
-        continue;
-      }
 
-       if (alignment && alignment !== e.results[i].biography.alignment) {
-        continue;
-      }
-      //render all HTML into .results div
-      let html = `
+    }
+
+    for (let i = 0; i < e.results.length; i++) {
+
+
+        if (gender && gender !== e.results[i].appearance["gender"]) {
+            continue;
+        }
+
+        if (alignment && alignment !== e.results[i].biography.alignment) {
+            continue;
+        } else if (undefined) {
+            alert("No characters found!")
+            $("#movieBtn").empty()
+        }
+        //render all HTML into .results div
+        let html = `
       <div class="grid-x grid-padding-x">
         <div class="large-12 medium-12 cell">
   
@@ -106,46 +122,58 @@ function displayResults(e) {
           </div>
   </div>
       `
-      //remove the preloader
-      $('.preloader').empty();
-      //Append searchResults
+        //remove the preloader
+        $('.preloader').empty();
+        //Append searchResults
         searchResults.append(`${html}`);
     }
 }
 
 //click #movieBtn button function event 
 function inputListenerMovie() {
-    $("#movieBtn").click( function(e) {
+    $("#movieBtn").click(function(e) {
         let mSearch = $("#search").val().toLowerCase();
-        console.log(mSearch) 
         //pull movie data from omdbapi.com
         pullMovieData(mSearch);
     });
 }
 
 function pullMovieData(mSearch) {
-  //https://omdbapi.com/?t=title&apikey=58d2e622
-
-    console.log(`The search value: ${mSearch}.`),
-        console.log(`GET REQUEST TO: http://www.omdbapi.com/?t=${mSearch}&apikey=58d2e622`),
-        fetch(`https://www.omdbapi.com/?t=${mSearch}&apikey=58d2e622`)
-            .then((m) => m.json())
-            .then((m) => displayMovieResults(m))
-            .catch((m) => console.log(m));
+    //https://omdbapi.com/?t=title&apikey=58d2e622
+    fetch(`https://www.omdbapi.com/?t=${mSearch}&apikey=58d2e622`)
+        .then((m) => m.json())
+        .then((m) => displayMovieResults(m))
+        .catch((m) => console.log(m));
 }
+
 function displayMovieResults(m) {
-  $("#movie-results").empty();
-  //Suggested movie title and movie poster
-$("#movie-results").append(`<div class="grid-x grid-padding-x">
-<h3 class="movie-title">${m.Title}</h3>
-<br>
-<img src="${m.Poster}">
+    $("#movieBtn").addClass("hidden")
+    $("#movie-results").empty();
+    //Suggested movie title and movie poster
+    $("#movie-results").append(`
+<div class="grid-x grid-padding-x">
+  <div class="large-12 medium-8 cell">
+    <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+            <div class="secondary callout">
+              <h3 class="movie-title"><a href="https://www.imdb.com/title/${m.imdbID}/" target="_blank"><strong>${m.Title}</strong></a></h3>
+                  <p><strong>Plot Summary:</strong> ${m.Plot}</p>
+                  <p><strong>Starring Actors:</strong> ${m.Actors}</p>
+                  <p><strong>Release Date:</strong> ${m.Released}</p>
+                  <p><strong>imDB rating:</strong> ${m.imdbRating}</p>
+                    <br>
+                      <a href="https://www.imdb.com/title/${m.imdbID}/" target="_blank">
+                          <img class="movie-poster" src="${m.Poster}"></a>
+              </div>
+            </div>
+          </div>
+      </div>
 </div>`)
-  
+
 
 }
 
-$(function () {
+$(function() {
     inputListener();
     inputListenerMovie();
 
