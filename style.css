@@ -75,3 +75,8 @@ ul {
 #movieBtn {
   margin: auto !important;
 }
+
+#submitBtn,
+#movieBtn{
+border-radius: 3px !important;
+}
