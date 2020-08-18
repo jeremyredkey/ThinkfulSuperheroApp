@@ -73,7 +73,7 @@ function displayResults(e) {
                     <h2 class="character-name">${e.results[i].name}</h2>
                   </li>
                   <li>
-                  <p id="alignment">Alignment: <strong>${e.results[i].biography.alignment}</strong></p>
+                  <p id="character-alignment">Alignment: <strong>${e.results[i].biography.alignment}</strong></p>
                   </li>
                   <li>
                   <p>Gender: <strong>${e.results[i].appearance["gender"]}</strong></p>
@@ -82,7 +82,7 @@ function displayResults(e) {
                   </li>
                   <li>
                   <div class="custom-progress-container">
-                  <h5><strong>Power Stats<strong></h5>
+                  <h5><strong>Power Stats</strong></h5>
                   <div class="progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
                   <span class="progress-meter" style="width: ${e.results[i].powerstats['combat']}%">
                     <span class="progress-meter-text">Combat: ${e.results[i].powerstats['combat']}%</span>
