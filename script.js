@@ -20,7 +20,7 @@ function pullData(search) {
     fetch(`https://superheroapi.com/api.php/${api_key}/search/${search}`)
         .then((e) => e.json())
         .then((e) => displayResults(e))
-        .catch((e) => alert("No character was found with that name, please try again."));
+        .catch((e) => console.log("Error: " + e));
 }
 // unhide movie suggestion button and display results based on filter parameters
 function displayResults(e) {
@@ -67,10 +67,10 @@ function displayResults(e) {
               <div class="primary callout">
                 <ul>
                   <li>
-                    <img class="character-img" src="${e.results[i].image.url}">
+                    <img class="character-img" src="${e.results[i].image.url}" alt="${e.results[i].name}">
                   </li>
                   <li>
-                    <h2><strong>${e.results[i].name}</strong></h2>
+                    <h2 class="character-name">${e.results[i].name}</h2>
                   </li>
                   <li>
                   <p id="alignment">Alignment: <strong>${e.results[i].biography.alignment}</strong></p>
@@ -163,7 +163,7 @@ function displayMovieResults(m) {
                   <p><strong>imDB rating:</strong> ${m.imdbRating}</p>
                     <br>
                       <a href="https://www.imdb.com/title/${m.imdbID}/" target="_blank">
-                          <img class="movie-poster" src="${m.Poster}"></a>
+                          <img class="movie-poster" src="${m.Poster}" alt="${m.Title}"></a>
               </div>
             </div>
           </div>

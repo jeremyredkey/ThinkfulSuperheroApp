@@ -12,6 +12,15 @@ h1 {
   font-weight: bold !important;
 }
 
+h2 {
+  font-size: 1.5em !important;
+}
+@media screen and (max-width: 39.9375em) {
+h2{
+display: none;
+}
+}
+
 header {
   background: url("superhero-bg.jpg");
   background-size: cover;
@@ -55,7 +64,9 @@ ul {
 .results {
   padding: 20px 50px;
 }
-
+.character-name {
+  display: block !important;
+}
 .movie-title {
   margin-left: 30px;
 }
@@ -79,4 +90,24 @@ ul {
 #submitBtn,
 #movieBtn{
 border-radius: 3px !important;
+}
+
+a {
+  text-decoration: underline !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+@media only screen and (max-width: 330px) {
+  .filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  #salignment,
+#gender {
+display: inline-block;
+}
 }
