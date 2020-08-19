@@ -73,7 +73,7 @@ function displayResults(e) {
                     <h2 class="character-name">${e.results[i].name}</h2>
                   </li>
                   <li>
-                  <p id="character-alignment">Alignment: <strong>${e.results[i].biography.alignment}</strong></p>
+                  <p class="character-alignment">Alignment: <strong>${e.results[i].biography.alignment}</strong></p>
                   </li>
                   <li>
                   <p>Gender: <strong>${e.results[i].appearance["gender"]}</strong></p>
